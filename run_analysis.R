@@ -25,9 +25,27 @@ DF2 <- DF[, c(1, 2, theMeasurements) ] # and columns SUBJECT_ID & ACTIVITY_ID
 activities <- read.table(file.path(dataDir,"activity_labels.txt"), stringsAsFactors = FALSE, col.names = c("ACTIVITY_ID", "ACTIVITY"))
 DF3 <- merge(x = activities, y = DF2, by = "ACTIVITY_ID")
 
-
 ## 4. Appropriately labels the data set with descriptive variable names. 
-
+ACTNAMES <- names(DF3)
+ACTNAMES <- sub("^t", replacement = "TIME_", x = ACTNAMES)
+ACTNAMES <- sub("^f", replacement = "FREQUENCY_", x = ACTNAMES)
+ACTNAMES <- sub("BodyBody|Body", replacement = "BODY_", x = ACTNAMES)
+ACTNAMES <- sub("Gravity", replacement = "GRAVITY_", x = ACTNAMES)
+ACTNAMES <- sub("\\(\\)", replacement = "", x = ACTNAMES)
+ACTNAMES <- sub("Acc", replacement = "ACCELERATION_", x = ACTNAMES)
+ACTNAMES <- sub("Jerk", replacement = "JERK_", x = ACTNAMES)
+ACTNAMES <- sub("Mag", replacement = "MAGNITUDE_", x = ACTNAMES)
+ACTNAMES <- sub("Gyro", replacement = "ANGULAR_VELOCITY_", x = ACTNAMES)
+ACTNAMES <- sub("-mean", replacement = "MEAN", x = ACTNAMES)
+ACTNAMES <- sub("-std", replacement = "STD", x = ACTNAMES)
+ACTNAMES <- sub("-", replacement = "_", x = ACTNAMES)
+names(DF3) <- ACTNAMES
 
 # 5. From the data set in step 4, creates a second, independent tidy data set 
 # with the average of each variable for each activity and each subject.
+DF5 <- DF3
+DF5$ACTIVITY_ID <- NULL  # remove unnecesary column
+DF5 <- transform(DF5, SUBJECT_ID = factor(SUBJECT_ID)) # column is really of factor type
+DF5 <- transform(DF5, ACTIVITY = factor(ACTIVITY)) # column is really of factor type
+DF6 <- aggregate(. ~ ACTIVITY + SUBJECT_ID, DF5, FUN = mean) # tidy data set
+write.table(x = DF6, file = "step5_dataset.txt", row.names = FALSE)
