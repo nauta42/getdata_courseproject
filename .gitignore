@@ -3,4 +3,6 @@
 .RData
 .RDataTmp
 *.Rproj
-
+*.zip
+chunk*
+UCI*
