@@ -22,8 +22,6 @@ DF2 <- DF[, c(1, 2, theMeasurements) ] # and columns SUBJECT_ID & ACTIVITY_ID
 activities <- read.table(file.path(dataDir,"activity_labels.txt"), stringsAsFactors = FALSE, col.names = c("ACTIVITY_ID", "ACTIVITY"))
 DF3 <- merge(x = activities, y = DF2, by = "ACTIVITY_ID")
 DF3$ACTIVITY_ID <- NULL  # remove unnecesary column
-DF3 <- transform(DF3, SUBJECT_ID = factor(SUBJECT_ID)) # column is really of factor type
-DF3 <- transform(DF3, ACTIVITY = factor(ACTIVITY)) # column is really of factor type
 
 
 ## 4. Appropriately labels the data set with descriptive variable names. 
@@ -43,6 +41,9 @@ ACTNAMES <- sub("-mean", replacement = "MEAN", x = ACTNAMES)
 ACTNAMES <- sub("-std", replacement = "STANDARD_DEVIATION", x = ACTNAMES)
 ACTNAMES <- sub("-", replacement = "_", x = ACTNAMES)
 names(DF4) <- ACTNAMES
+#  WARNING! the transform() MUST BE AFTER renaming the columns because change symbols in names
+DF4 <- transform(DF4, SUBJECT_ID = factor(SUBJECT_ID)) # column is really of factor type
+DF4 <- transform(DF4, ACTIVITY = factor(ACTIVITY)) # column is really of factor type
 
 
 ## 5. New tidy data set with the average of each variable for each activity and each subject.

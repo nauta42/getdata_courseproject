@@ -18,7 +18,8 @@ Column 1: "SUBJECT_ID"
 Column 2: "ACTIVITY_ID"
 Columns 3-563: names were taken from file 'features.txt' in the original dataset.
 
-The measurements on the mean and standard deviation for each measurement were extracted, only the columns processed by functions mean() and std()
+The measurements on the mean and standard deviation for each measurement were extracted, only subsetting the columns processed by functions mean() and std().
+The column for the activity ids was replaced with the more descriptive names for the activities
 
 
 3. Uses descriptive activity names to name the activities in the data set
