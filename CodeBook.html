@@ -61,43 +61,112 @@ img {
 
 
 
-<div id="getting-and-cleaning-data-course-project" class="section level1">
-<h1>Getting and Cleaning Data Course Project</h1>
-<div id="index-of-files" class="section level2">
-<h2>Index of files</h2>
-<ul>
-<li>README.md</li>
-<li>get_data.R</li>
-<li>run_analysis.R</li>
-<li>step5_dataset.txt</li>
-<li>CodeBook.md</li>
-</ul>
-<div id="readme.md" class="section level3">
-<h3>README.md</h3>
-<p>This markdown text file, describes the project and explains how all of the scripts work and how they are connected.</p>
-</div>
-<div id="get_data.r" class="section level3">
-<h3>get_data.R</h3>
-<p>Script in R, downloads and unzip the data set.</p>
-</div>
-<div id="run_analysis.r" class="section level3">
-<h3>run_analysis.R</h3>
-<p>Analysis file for the course project, runs the next five steps.</p>
+<div id="codebook.md" class="section level1">
+<h1>CodeBook.md</h1>
+<p>This file is a code book that describes the variables, the data, and any transformations or work that was performed to clean up the data.</p>
+<div id="analysis" class="section level2">
+<h2>Analysis</h2>
+<p>From the original data set, that comprises many files, this analysis has column binded them in this order:</p>
 <ol style="list-style-type: decimal">
-<li>Merges the training and the test sets to create one data set<br /></li>
-<li>Extracts only the measurements on the mean and standard deviation for each measurement<br /></li>
-<li>Uses descriptive activity names to name the activities in the data set<br /></li>
-<li>Appropriately labels the data set with descriptive variable names<br /></li>
-<li>From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject</li>
+<li>subject_test.txt</li>
+<li>y_test.txt</li>
+<li>X_test.txt</li>
 </ol>
-</div>
+<p>getting the test rows first, and next</p>
+<ol style="list-style-type: decimal">
+<li>subject_train.txt</li>
+<li>y_train.txt</li>
+<li>X_train.txt</li>
+</ol>
+<p>for getting the train rows. Afterwards the two datasets were row binded to create one dataset.</p>
+<p>It was assigned descriptive names for the columns 3-563, taken from file ‘features.txt’ in the original dataset to ease the next step in the analysis.</p>
+<ul>
+<li>Column 1: “SUBJECT_ID”</li>
+<li>Column 2: “ACTIVITY_ID”</li>
+<li>Columns 3-563: the 561 measurements described in file ‘features.txt’</li>
+</ul>
+<p>The measurements on the mean and standard deviation for each measurement were extracted, subsetting the columns processed by functions mean() and std() and getting only 66 measurements.</p>
+<p>The column for the activity ids was replaced with the more descriptive names for the activities, taken from ‘activity_labels.txt’. The unnecesary ACTIVITY_ID column was removed.</p>
+<p>The 66 measurements columns were relabeled with descriptive variable names in the format LONG_NAMES_ALL_UPPERCASE_WITH_UNDERSCORES.</p>
+<p>An independent tidy data set with the average of each variable for each activity and each subject was created and writed to file ‘step5_dataset.txt’ provided with this project and described above.</p>
 <div id="step5_dataset.txt" class="section level3">
 <h3>step5_dataset.txt</h3>
-<p>The tidy data set created in step 5 of the instructions with the average of each variable for each activity and each subject.</p>
+<p>The tidy data set created in step 5 of the instructions with the average of each variable for each activity and each subject. It is a text file with 180 rows and 68 columns.</p>
 </div>
-<div id="codebook.md" class="section level3">
-<h3>CodeBook.md</h3>
-<p>A code book that describes the variables, the data, and any transformations or work that was performed to clean up the data.</p>
+<div id="variables" class="section level3">
+<h3>Variables</h3>
+<ul>
+<li>“ACTIVITY” : name of the activity that makes the subject</li>
+<li>“SUBJECT_ID” : subject identifier</li>
+</ul>
+<p>The next 66 variables are calculated AVERAGES of the variables by activity and subject.</p>
+<ul>
+<li>“TIME_BODY_ACCELERATION_MEAN_X”</li>
+<li>“TIME_BODY_ACCELERATION_MEAN_Y”</li>
+<li>“TIME_BODY_ACCELERATION_MEAN_Z”</li>
+<li>“TIME_BODY_ACCELERATION_STANDARD_DEVIATION_X”</li>
+<li>“TIME_BODY_ACCELERATION_STANDARD_DEVIATION_Y”</li>
+<li>“TIME_BODY_ACCELERATION_STANDARD_DEVIATION_Z”</li>
+<li>“TIME_GRAVITY_ACCELERATION_MEAN_X” “TIME_GRAVITY_ACCELERATION_MEAN_Y”</li>
+<li>“TIME_GRAVITY_ACCELERATION_MEAN_Z”</li>
+<li>“TIME_GRAVITY_ACCELERATION_STANDARD_DEVIATION_X”</li>
+<li>“TIME_GRAVITY_ACCELERATION_STANDARD_DEVIATION_Y”</li>
+<li>“TIME_GRAVITY_ACCELERATION_STANDARD_DEVIATION_Z”</li>
+<li>“TIME_BODY_ACCELERATION_JERK_MEAN_X”</li>
+<li>“TIME_BODY_ACCELERATION_JERK_MEAN_Y”</li>
+<li>“TIME_BODY_ACCELERATION_JERK_MEAN_Z”</li>
+<li>“TIME_BODY_ACCELERATION_JERK_STANDARD_DEVIATION_X”</li>
+<li>“TIME_BODY_ACCELERATION_JERK_STANDARD_DEVIATION_Y”</li>
+<li>“TIME_BODY_ACCELERATION_JERK_STANDARD_DEVIATION_Z”</li>
+<li>“TIME_BODY_ANGULAR_VELOCITY_MEAN_X”</li>
+<li>“TIME_BODY_ANGULAR_VELOCITY_MEAN_Y”</li>
+<li>“TIME_BODY_ANGULAR_VELOCITY_MEAN_Z”</li>
+<li>“TIME_BODY_ANGULAR_VELOCITY_STANDARD_DEVIATION_X”</li>
+<li>“TIME_BODY_ANGULAR_VELOCITY_STANDARD_DEVIATION_Y”</li>
+<li>“TIME_BODY_ANGULAR_VELOCITY_STANDARD_DEVIATION_Z”</li>
+<li>“TIME_BODY_ANGULAR_VELOCITY_JERK_MEAN_X”</li>
+<li>“TIME_BODY_ANGULAR_VELOCITY_JERK_MEAN_Y”</li>
+<li>“TIME_BODY_ANGULAR_VELOCITY_JERK_MEAN_Z”</li>
+<li>“TIME_BODY_ANGULAR_VELOCITY_JERK_STANDARD_DEVIATION_X”</li>
+<li>“TIME_BODY_ANGULAR_VELOCITY_JERK_STANDARD_DEVIATION_Y”</li>
+<li>“TIME_BODY_ANGULAR_VELOCITY_JERK_STANDARD_DEVIATION_Z”</li>
+<li>“TIME_BODY_ACCELERATION_MAGNITUDE_MEAN”</li>
+<li>“TIME_BODY_ACCELERATION_MAGNITUDE_STANDARD_DEVIATION”</li>
+<li>“TIME_GRAVITY_ACCELERATION_MAGNITUDE_MEAN”</li>
+<li>“TIME_GRAVITY_ACCELERATION_MAGNITUDE_STANDARD_DEVIATION”</li>
+<li>“TIME_BODY_ACCELERATION_JERK_MAGNITUDE_MEAN”</li>
+<li>“TIME_BODY_ACCELERATION_JERK_MAGNITUDE_STANDARD_DEVIATION”</li>
+<li>“TIME_BODY_ANGULAR_VELOCITY_MAGNITUDE_MEAN”</li>
+<li>“TIME_BODY_ANGULAR_VELOCITY_MAGNITUDE_STANDARD_DEVIATION”</li>
+<li>“TIME_BODY_ANGULAR_VELOCITY_JERK_MAGNITUDE_MEAN”</li>
+<li>“TIME_BODY_ANGULAR_VELOCITY_JERK_MAGNITUDE_STANDARD_DEVIATION”</li>
+<li>“FREQUENCY_BODY_ACCELERATION_MEAN_X”</li>
+<li>“FREQUENCY_BODY_ACCELERATION_MEAN_Y”</li>
+<li>“FREQUENCY_BODY_ACCELERATION_MEAN_Z”</li>
+<li>“FREQUENCY_BODY_ACCELERATION_STANDARD_DEVIATION_X”</li>
+<li>“FREQUENCY_BODY_ACCELERATION_STANDARD_DEVIATION_Y”</li>
+<li>“FREQUENCY_BODY_ACCELERATION_STANDARD_DEVIATION_Z”</li>
+<li>“FREQUENCY_BODY_ACCELERATION_JERK_MEAN_X”</li>
+<li>“FREQUENCY_BODY_ACCELERATION_JERK_MEAN_Y”</li>
+<li>“FREQUENCY_BODY_ACCELERATION_JERK_MEAN_Z”</li>
+<li>“FREQUENCY_BODY_ACCELERATION_JERK_STANDARD_DEVIATION_X”</li>
+<li>“FREQUENCY_BODY_ACCELERATION_JERK_STANDARD_DEVIATION_Y”</li>
+<li>“FREQUENCY_BODY_ACCELERATION_JERK_STANDARD_DEVIATION_Z”</li>
+<li>“FREQUENCY_BODY_ANGULAR_VELOCITY_MEAN_X”</li>
+<li>“FREQUENCY_BODY_ANGULAR_VELOCITY_MEAN_Y”</li>
+<li>“FREQUENCY_BODY_ANGULAR_VELOCITY_MEAN_Z”</li>
+<li>“FREQUENCY_BODY_ANGULAR_VELOCITY_STANDARD_DEVIATION_X”</li>
+<li>“FREQUENCY_BODY_ANGULAR_VELOCITY_STANDARD_DEVIATION_Y”</li>
+<li>“FREQUENCY_BODY_ANGULAR_VELOCITY_STANDARD_DEVIATION_Z”</li>
+<li>“FREQUENCY_BODY_ACCELERATION_MAGNITUDE_MEAN”</li>
+<li>“FREQUENCY_BODY_ACCELERATION_MAGNITUDE_STANDARD_DEVIATION”</li>
+<li>“FREQUENCY_BODY_ACCELERATION_JERK_MAGNITUDE_MEAN”</li>
+<li>“FREQUENCY_BODY_ACCELERATION_JERK_MAGNITUDE_STANDARD_DEVIATION”</li>
+<li>“FREQUENCY_BODY_ANGULAR_VELOCITY_MAGNITUDE_MEAN”</li>
+<li>“FREQUENCY_BODY_ANGULAR_VELOCITY_MAGNITUDE_STANDARD_DEVIATION”</li>
+<li>“FREQUENCY_BODY_ANGULAR_VELOCITY_JERK_MAGNITUDE_MEAN”</li>
+<li>“FREQUENCY_BODY_ANGULAR_VELOCITY_JERK_MAGNITUDE_STANDARD_DEVIATION”</li>
+</ul>
 </div>
 </div>
 </div>
